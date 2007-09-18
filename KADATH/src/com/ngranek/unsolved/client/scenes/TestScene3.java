@@ -26,13 +26,15 @@ import com.jmex.terrain.TerrainPage;
 import com.jmex.terrain.util.ImageBasedHeightMap;
 import com.jmex.terrain.util.ProceduralTextureGenerator;
 import com.ngranek.unsolved.client.Main;
+import com.ngranek.unsolved.client.config.KADATHConfig;
 
 public class TestScene3 extends BaseScene {
+
 	private Skybox skybox;
 	private Quad waterQuad;
 	private float farPlane = 500000.0f;
 	private float textureScale = 0.02f;
-	
+
 	private Vector3f camPos = new Vector3f();
 	private TerrainPage terrain;
 
@@ -84,23 +86,29 @@ public class TestScene3 extends BaseScene {
 
 		// The terrain
 		//HillHeightMap heightMap = new HillHeightMap(129, 2000, 5.0f, 20.0f, (byte) 2);
-		
-		ImageBasedHeightMap heightMap = new ImageBasedHeightMap(new ImageIcon("/home/bigjocker/workspace/KADATH/testdata/heightmap1.png").getImage());
-		
+
+		String dataDir = KADATHConfig.getProperty("com.ngranek.unsolved.base.dir")
+				+ KADATHConfig.getProperty("com.ngranek.unsolved.data.dir");
+
+		ImageBasedHeightMap heightMap = new ImageBasedHeightMap(new ImageIcon(dataDir + "/heightmap1.png")
+				.getImage());
+
 		heightMap.setHeightScale(0.01f);
 		Vector3f terrainScale = new Vector3f(10000, 400, 10000);
-		terrain = new TerrainPage("Terrain", 33, heightMap.getSize(), terrainScale, heightMap
-				.getHeightMap(), false);
+		terrain = new TerrainPage("Terrain", 33, heightMap.getSize(), terrainScale, heightMap.getHeightMap(),
+				false);
 		terrain.setDetailTexture(1, 400);
 		node.attachChild(terrain);
 
-		String dir = "/home/bigjocker/workspace/KADATH/testdata/texture/";
+		String dir = KADATHConfig.getProperty("com.ngranek.unsolved.base.dir")
+				+ KADATHConfig.getProperty("com.ngranek.unsolved.textures.dir");
 
+		
 		// Some textures
 		ProceduralTextureGenerator pt = new ProceduralTextureGenerator(heightMap);
-		pt.addTexture(new ImageIcon(dir + "/grassb.png"), -128, 0, 128);
-		pt.addTexture(new ImageIcon(dir + "/dirt.jpg"), 0, 128, 255);
-		pt.addTexture(new ImageIcon(dir + "/highest.jpg"), 128, 255, 384);
+		pt.addTexture(new ImageIcon(dir + "grassb.png"), -128, 0, 128);
+		pt.addTexture(new ImageIcon(dir + "dirt.jpg"), 0, 128, 255);
+		pt.addTexture(new ImageIcon(dir + "highest.jpg"), 128, 255, 384);
 
 		pt.createTexture(256);
 
@@ -110,7 +118,8 @@ public class TestScene3 extends BaseScene {
 				Texture.FM_LINEAR, true);
 		ts.setTexture(t1, 0);
 
-		Texture t2 = TextureManager.loadTexture(dir + "/Detail.jpg", Texture.MM_LINEAR_LINEAR, Texture.FM_LINEAR);
+		Texture t2 = TextureManager.loadTexture(dir + "/Detail.jpg", Texture.MM_LINEAR_LINEAR,
+				Texture.FM_LINEAR);
 		ts.setTexture(t2, 1);
 		t2.setWrap(Texture.WM_WRAP_S_WRAP_T);
 
@@ -133,13 +142,14 @@ public class TestScene3 extends BaseScene {
 	}
 
 	public void update() {
-		if (Main.getInstance().getCamera().getLocation().y <= terrain.getHeight(Main.getInstance().getCamera().getLocation()) + 30) {
+		if (Main.getInstance().getCamera().getLocation().y <= terrain.getHeight(Main.getInstance()
+				.getCamera().getLocation()) + 30) {
 			camPos.x = Main.getInstance().getCamera().getLocation().x;
 			camPos.y = terrain.getHeight(Main.getInstance().getCamera().getLocation()) + 30;
 			camPos.z = Main.getInstance().getCamera().getLocation().z;
 			Main.getInstance().getCamera().setLocation(camPos);
 		}
-		
+
 		if (skybox != null) {
 			skybox.getLocalTranslation().set(Main.getInstance().getCamera().getLocation());
 			skybox.updateGeometricState(0.0f, true);
@@ -184,7 +194,9 @@ public class TestScene3 extends BaseScene {
 	private void buildSkyBox() {
 		skybox = new Skybox("skybox", 10, 10, 10);
 
-		String dir = "/home/bigjocker/workspace/KADATH/testdata/skybox1/";
+		String dir = KADATHConfig.getProperty("com.ngranek.unsolved.base.dir")
+				+ KADATHConfig.getProperty("com.ngranek.unsolved.skybox.1.dir");
+		
 		Texture north = TextureManager.loadTexture(dir + "1.jpg", Texture.MM_LINEAR, Texture.FM_LINEAR);
 		Texture south = TextureManager.loadTexture(dir + "3.jpg", Texture.MM_LINEAR, Texture.FM_LINEAR);
 		Texture east = TextureManager.loadTexture(dir + "2.jpg", Texture.MM_LINEAR, Texture.FM_LINEAR);

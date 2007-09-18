@@ -29,8 +29,10 @@ import com.jmex.terrain.TerrainPage;
 import com.jmex.terrain.util.HillHeightMap;
 import com.jmex.terrain.util.ProceduralTextureGenerator;
 import com.ngranek.unsolved.client.Main;
+import com.ngranek.unsolved.client.config.KADATHConfig;
 
 public class TestScene1 extends BaseScene {
+
 	private WaterRenderPass waterEffectRenderPass;
 	private Skybox skybox;
 	private Quad waterQuad;
@@ -104,7 +106,8 @@ public class TestScene1 extends BaseScene {
 		terrain.setDetailTexture(1, 16);
 		node.attachChild(terrain);
 
-		String dir = "/home/bigjocker/workspace/KADATH/testdata/texture/";
+		String dir = KADATHConfig.getProperty("com.ngranek.unsolved.base.dir")
+				+ KADATHConfig.getProperty("com.ngranek.unsolved.textures.dir");
 
 		// Some textures
 		ProceduralTextureGenerator pt = new ProceduralTextureGenerator(heightMap);
@@ -120,7 +123,8 @@ public class TestScene1 extends BaseScene {
 				Texture.FM_LINEAR, true);
 		ts.setTexture(t1, 0);
 
-		Texture t2 = TextureManager.loadTexture(dir + "/Detail.jpg", Texture.MM_LINEAR_LINEAR, Texture.FM_LINEAR);
+		Texture t2 = TextureManager.loadTexture(dir + "/Detail.jpg", Texture.MM_LINEAR_LINEAR,
+				Texture.FM_LINEAR);
 		ts.setTexture(t2, 1);
 		t2.setWrap(Texture.WM_WRAP_S_WRAP_T);
 
@@ -194,8 +198,8 @@ public class TestScene1 extends BaseScene {
 		}
 
 		if (waterEffectRenderPass != null) {
-			Vector3f transVec = new Vector3f(Main.getInstance().getCamera().getLocation().x, waterEffectRenderPass
-					.getWaterHeight(), Main.getInstance().getCamera().getLocation().z);
+			Vector3f transVec = new Vector3f(Main.getInstance().getCamera().getLocation().x,
+					waterEffectRenderPass.getWaterHeight(), Main.getInstance().getCamera().getLocation().z);
 
 			setTextureCoords(0, transVec.x, -transVec.z, textureScale);
 			setVertexCoords(transVec.x, transVec.y, transVec.z);
@@ -240,7 +244,8 @@ public class TestScene1 extends BaseScene {
 	private void buildSkyBox() {
 		skybox = new Skybox("skybox", 10, 10, 10);
 
-		String dir = "/home/bigjocker/workspace/KADATH/testdata/skybox1/";
+		String dir = KADATHConfig.getProperty("com.ngranek.unsolved.base.dir")
+				+ KADATHConfig.getProperty("com.ngranek.unsolved.skybox.1.dir");
 		Texture north = TextureManager.loadTexture(dir + "1.jpg", Texture.MM_LINEAR, Texture.FM_LINEAR);
 		Texture south = TextureManager.loadTexture(dir + "3.jpg", Texture.MM_LINEAR, Texture.FM_LINEAR);
 		Texture east = TextureManager.loadTexture(dir + "2.jpg", Texture.MM_LINEAR, Texture.FM_LINEAR);

@@ -34,8 +34,10 @@ import com.jmex.terrain.TerrainPage;
 import com.jmex.terrain.util.HillHeightMap;
 import com.jmex.terrain.util.ProceduralTextureGenerator;
 import com.ngranek.unsolved.client.Main;
+import com.ngranek.unsolved.client.config.KADATHConfig;
 
 public class TestScene2 extends BaseScene {
+
 	private WaterRenderPass waterEffectRenderPass;
 	private Skybox skybox;
 	private ProjectedGrid projectedGrid;
@@ -101,10 +103,10 @@ public class TestScene2 extends BaseScene {
 		Main.getInstance().getRootNode().setCullMode(SceneElement.CULL_NEVER);
 		Main.getInstance().getRootNode().setRenderQueueMode(Renderer.QUEUE_OPAQUE);
 		Main.getInstance().getFPSNode().setRenderQueueMode(Renderer.QUEUE_OPAQUE);
-		
+
 		setupTerrain(Main.getInstance().getRootNode());
 	}
-	
+
 	protected void setupTerrain(Node node) {
 		/*
 		 * CameraNode camNode = new CameraNode("Camera Node",
@@ -135,7 +137,8 @@ public class TestScene2 extends BaseScene {
 		terrain.setDetailTexture(1, 16);
 		node.attachChild(terrain);
 
-		String dir = "/home/bigjocker/workspace/KADATH/testdata/texture/";
+		String dir = KADATHConfig.getProperty("com.ngranek.unsolved.base.dir")
+				+ KADATHConfig.getProperty("com.ngranek.unsolved.textures.dir");
 
 		// Some textures
 		ProceduralTextureGenerator pt = new ProceduralTextureGenerator(heightMap);
@@ -151,7 +154,8 @@ public class TestScene2 extends BaseScene {
 				Texture.FM_LINEAR, true);
 		ts.setTexture(t1, 0);
 
-		Texture t2 = TextureManager.loadTexture(dir + "/Detail.jpg", Texture.MM_LINEAR_LINEAR, Texture.FM_LINEAR);
+		Texture t2 = TextureManager.loadTexture(dir + "/Detail.jpg", Texture.MM_LINEAR_LINEAR,
+				Texture.FM_LINEAR);
 		ts.setTexture(t2, 1);
 		t2.setWrap(Texture.WM_WRAP_S_WRAP_T);
 
@@ -203,20 +207,18 @@ public class TestScene2 extends BaseScene {
 		skybox = new Skybox("skybox", 10, 10, 10);
 
 		String dir = "jmetest/effects/water/data/";
-		Texture north = TextureManager.loadTexture(
-				TestProjectedWater.class.getClassLoader().getResource(dir + "1.jpg"), Texture.MM_LINEAR,
-				Texture.FM_LINEAR);
-		Texture south = TextureManager.loadTexture(
-				TestProjectedWater.class.getClassLoader().getResource(dir + "3.jpg"), Texture.MM_LINEAR,
-				Texture.FM_LINEAR);
-		Texture east = TextureManager.loadTexture(TestProjectedWater.class.getClassLoader().getResource(dir + "2.jpg"),
-				Texture.MM_LINEAR, Texture.FM_LINEAR);
-		Texture west = TextureManager.loadTexture(TestProjectedWater.class.getClassLoader().getResource(dir + "4.jpg"),
-				Texture.MM_LINEAR, Texture.FM_LINEAR);
-		Texture up = TextureManager.loadTexture(TestProjectedWater.class.getClassLoader().getResource(dir + "6.jpg"),
-				Texture.MM_LINEAR, Texture.FM_LINEAR);
-		Texture down = TextureManager.loadTexture(TestProjectedWater.class.getClassLoader().getResource(dir + "5.jpg"),
-				Texture.MM_LINEAR, Texture.FM_LINEAR);
+		Texture north = TextureManager.loadTexture(TestProjectedWater.class.getClassLoader().getResource(
+				dir + "1.jpg"), Texture.MM_LINEAR, Texture.FM_LINEAR);
+		Texture south = TextureManager.loadTexture(TestProjectedWater.class.getClassLoader().getResource(
+				dir + "3.jpg"), Texture.MM_LINEAR, Texture.FM_LINEAR);
+		Texture east = TextureManager.loadTexture(TestProjectedWater.class.getClassLoader().getResource(
+				dir + "2.jpg"), Texture.MM_LINEAR, Texture.FM_LINEAR);
+		Texture west = TextureManager.loadTexture(TestProjectedWater.class.getClassLoader().getResource(
+				dir + "4.jpg"), Texture.MM_LINEAR, Texture.FM_LINEAR);
+		Texture up = TextureManager.loadTexture(TestProjectedWater.class.getClassLoader().getResource(
+				dir + "6.jpg"), Texture.MM_LINEAR, Texture.FM_LINEAR);
+		Texture down = TextureManager.loadTexture(TestProjectedWater.class.getClassLoader().getResource(
+				dir + "5.jpg"), Texture.MM_LINEAR, Texture.FM_LINEAR);
 
 		skybox.setTexture(Skybox.NORTH, north);
 		skybox.setTexture(Skybox.WEST, west);
