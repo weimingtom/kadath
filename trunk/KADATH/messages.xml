@@ -1,0 +1,29 @@
+<messages>
+	<message name="SampleMessage">
+		<field name="intVar" type="int" />
+		<field name="stringVar" type="String" />
+	</message>
+	<message name="ConnectionRequest">
+		<field name="login" type="String" />
+	</message>
+	<message name="ConnectionResponse">
+		<field name="salt" type="String" />
+	</message>
+	<message name="LoginRequest">
+		<field name="login" type="String" />
+		<field name="password" type="String" />
+	</message>
+	<message name="LoginResponse">
+		<field name="result" type="boolean" />
+		<field name="scene" type="String" />
+	</message>
+	<message name="CommandRequest">
+		<field name="text" type="String" />
+	</message>
+	<message name="CommandResponse">
+		<field name="result" type="String" />
+	</message>
+	<message name="SetSkyboxRequest">
+		<field name="name" type="String" />
+	</message>
+</messages>
