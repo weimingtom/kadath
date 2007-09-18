@@ -53,7 +53,6 @@ public class TestScene3 extends BaseScene {
 		Main.getInstance().getCamera().update();
 
 		setupKeyBindings();
-
 		setupFog();
 
 		RenderPass fpsPass = new RenderPass();
