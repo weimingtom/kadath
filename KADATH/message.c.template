@@ -1,0 +1,28 @@
+class {0}: public AbstractMessage '{'
+	private:
+{1}
+
+	public:
+		{0}() '{'
+{2}
+		'}'
+
+{3}
+
+		void send() '{'
+			NetworkManager *networkManager = Unsolved::getInstance()->getNetworkManager();
+			KADATHMessage *message = networkManager->createMessage(Unsolved::getInstance()->getSessionId(), getMessageId());
+
+{4}
+			
+			networkManager->addMessageToOutgoingQueue(message);
+		'}'
+		
+		void buildMessage(byte *bt, int pos) '{'
+			int size = 0;
+			char *str = NULL;
+			NetworkManager *networkManager = Unsolved::getInstance()->getNetworkManager();
+			
+{5}
+		'}'
+'}';

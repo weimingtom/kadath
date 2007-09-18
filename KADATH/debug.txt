@@ -1,0 +1,142 @@
+Sep 17, 2007 2:10:20 PM com.jme.app.BaseGame start
+INFO: Application started.
+Sep 17, 2007 2:10:20 PM com.jme.system.PropertiesIO <init>
+INFO: PropertiesIO created
+Sep 17, 2007 2:10:20 PM com.jme.system.PropertiesIO load
+INFO: Read properties
+Sep 17, 2007 2:10:20 PM com.ngranek.unsolved.client.KADATHBaseSimpleGame initSystem
+INFO: jME version 0.11 beta
+Sep 17, 2007 2:10:20 PM com.jme.input.joystick.DummyJoystickInput <init>
+INFO: Joystick support is disabled
+Sep 17, 2007 2:10:21 PM com.jme.system.lwjgl.LWJGLDisplaySystem <init>
+INFO: LWJGL Display System created.
+Sep 17, 2007 2:10:21 PM com.jme.renderer.lwjgl.LWJGLRenderer <init>
+INFO: LWJGLRenderer created. W:  800H: 600
+Sep 17, 2007 2:10:21 PM com.ngranek.unsolved.client.KADATHBaseSimpleGame initSystem
+INFO: Running on: null
+Driver version: null
+ATI Technologies Inc. - ATI Radeon Xpress Series - 2.0.6474 (8.38.6)
+Sep 17, 2007 2:10:21 PM com.jme.renderer.AbstractCamera <init>
+INFO: Camera created.
+Sep 17, 2007 2:10:22 PM com.jme.util.lwjgl.LWJGLTimer <init>
+INFO: Timer resolution: 1000 ticks per second
+Sep 17, 2007 2:10:22 PM com.jme.scene.Node <init>
+INFO: Node created.
+Sep 17, 2007 2:10:22 PM com.jme.scene.Node <init>
+INFO: Node created.
+Sep 17, 2007 2:10:22 PM com.jme.scene.Node attachChild
+INFO: Child (FPS label) attached to this node (FPS node)
+Sep 17, 2007 2:10:22 PM com.jme.scene.Node <init>
+INFO: Node created.
+Sep 17, 2007 2:10:22 PM com.jme.scene.Node attachChild
+INFO: Child (desktop) attached to this node (gui)
+Sep 17, 2007 2:10:22 PM com.jme.scene.Node attachChild
+INFO: Child (infodesktop) attached to this node (gui)
+Sep 17, 2007 2:10:58 PM com.ngranek.unsolved.server.MessagesConsumer registerConsumer
+INFO: Registered method 'com.ngranek.unsolved.client.consumers.ClientConnectionConsumer.processConnectionResponse' for message 'ConnectionResponse'
+Sep 17, 2007 2:10:58 PM com.ngranek.unsolved.server.MessagesConsumer registerConsumer
+INFO: Registered method 'com.ngranek.unsolved.client.consumers.ClientConnectionConsumer.processLoginResponse' for message 'LoginResponse'
+Sep 17, 2007 2:10:58 PM com.ngranek.unsolved.server.ClientThread <init>
+INFO: New connection from 'localhost/127.0.0.1:9876
+Sep 17, 2007 2:10:58 PM com.ngranek.unsolved.server.ClientThread run
+INFO: New message from 'localhost/127.0.0.1:9876 with size '26'
+Sep 17, 2007 2:10:58 PM com.ngranek.unsolved.server.ClientThread run
+INFO: Read '26'
+Sep 17, 2007 2:10:58 PM com.ngranek.unsolved.server.MessagesConsumer buildMessage
+INFO: Message bytes: [0, 0, 0, 2, -1, -1, -1, -1, 0, 16, 120, 97, 99, 57, 72, 49, 74, 72, 119, 80, 47, 68, 71, 73, 102, 77]
+Sep 17, 2007 2:10:58 PM com.ngranek.unsolved.server.MessagesConsumer buildMessage
+INFO: Message code: 2
+Sep 17, 2007 2:10:58 PM com.ngranek.unsolved.server.MessagesConsumer buildMessage
+INFO: Session: -1
+Sep 17, 2007 2:10:58 PM com.ngranek.unsolved.server.MessagesConsumer consume
+INFO: Found consumer for 'ConnectionResponse' (public static void com.ngranek.unsolved.client.consumers.ClientConnectionConsumer.processConnectionResponse(com.ngranek.unsolved.server.MessagesConsumer,com.ngranek.unsolved.server.ClientThread,com.ngranek.unsolved.server.messages.AbstractMessage) throws java.lang.Exception)
+Sep 17, 2007 2:10:58 PM com.ngranek.unsolved.client.consumers.ClientConnectionConsumer processConnectionResponse
+INFO: Sending password: '8844F6A6E37E96B8C39EC84313595013A78C8A00CABFE39A43E91DD0F811FAB7'
+Sep 17, 2007 2:10:58 PM com.ngranek.unsolved.server.ClientThread run
+INFO: New message from 'localhost/127.0.0.1:9876 with size '56'
+Sep 17, 2007 2:10:58 PM com.ngranek.unsolved.server.ClientThread run
+INFO: Read '56'
+Sep 17, 2007 2:10:58 PM com.ngranek.unsolved.server.MessagesConsumer buildMessage
+INFO: Message bytes: [0, 0, 0, 4, 0, -105, 85, 7, 0, 0, 45, 99, 111, 109, 46, 110, 103, 114, 97, 110, 101, 107, 46, 117, 110, 115, 111, 108, 118, 101, 100, 46, 99, 108, 105, 101, 110, 116, 46, 115, 99, 101, 110, 101, 115, 46, 84, 101, 115, 116, 83, 99, 101, 110, 101, 51]
+Sep 17, 2007 2:10:58 PM com.ngranek.unsolved.server.MessagesConsumer buildMessage
+INFO: Message code: 4
+Sep 17, 2007 2:10:58 PM com.ngranek.unsolved.server.MessagesConsumer buildMessage
+INFO: Session: 9917703
+Sep 17, 2007 2:10:58 PM com.ngranek.unsolved.server.MessagesConsumer consume
+INFO: Found consumer for 'LoginResponse' (public static void com.ngranek.unsolved.client.consumers.ClientConnectionConsumer.processLoginResponse(com.ngranek.unsolved.server.MessagesConsumer,com.ngranek.unsolved.server.ClientThread,com.ngranek.unsolved.server.messages.AbstractMessage) throws java.lang.Exception)
+Sep 17, 2007 2:10:58 PM com.ngranek.unsolved.client.consumers.ClientConnectionConsumer processLoginResponse
+INFO: Session id: '9917703'
+Sep 17, 2007 2:10:58 PM com.jme.scene.Node <init>
+INFO: Node created.
+Sep 17, 2007 2:10:58 PM com.jme.scene.Node attachChild
+INFO: Child (north) attached to this node (skybox)
+Sep 17, 2007 2:10:58 PM com.jme.scene.Node attachChild
+INFO: Child (south) attached to this node (skybox)
+Sep 17, 2007 2:10:58 PM com.jme.scene.Node attachChild
+INFO: Child (east) attached to this node (skybox)
+Sep 17, 2007 2:10:58 PM com.jme.scene.Node attachChild
+INFO: Child (west) attached to this node (skybox)
+Sep 17, 2007 2:10:58 PM com.jme.scene.Node attachChild
+INFO: Child (up) attached to this node (skybox)
+Sep 17, 2007 2:10:58 PM com.jme.scene.Node attachChild
+INFO: Child (down) attached to this node (skybox)
+Sep 17, 2007 2:11:00 PM com.jme.scene.Node attachChild
+INFO: Child (skybox) attached to this node (rootNode)
+Sep 17, 2007 2:11:00 PM com.jme.scene.Node <init>
+INFO: Node created.
+Sep 17, 2007 2:11:00 PM com.jme.scene.Node <init>
+INFO: Node created.
+Sep 17, 2007 2:11:00 PM com.jme.scene.Node attachChild
+INFO: Child (TerrainPage1Block1) attached to this node (TerrainPage1)
+Sep 17, 2007 2:11:00 PM com.jme.scene.Node attachChild
+INFO: Child (TerrainPage1Block2) attached to this node (TerrainPage1)
+Sep 17, 2007 2:11:00 PM com.jme.scene.Node attachChild
+INFO: Child (TerrainPage1Block3) attached to this node (TerrainPage1)
+Sep 17, 2007 2:11:00 PM com.jme.scene.Node attachChild
+INFO: Child (TerrainPage1Block4) attached to this node (TerrainPage1)
+Sep 17, 2007 2:11:00 PM com.jme.scene.Node attachChild
+INFO: Child (TerrainPage1) attached to this node (Terrain)
+Sep 17, 2007 2:11:00 PM com.jme.scene.Node <init>
+INFO: Node created.
+Sep 17, 2007 2:11:00 PM com.jme.scene.Node attachChild
+INFO: Child (TerrainPage2Block1) attached to this node (TerrainPage2)
+Sep 17, 2007 2:11:00 PM com.jme.scene.Node attachChild
+INFO: Child (TerrainPage2Block2) attached to this node (TerrainPage2)
+Sep 17, 2007 2:11:00 PM com.jme.scene.Node attachChild
+INFO: Child (TerrainPage2Block3) attached to this node (TerrainPage2)
+Sep 17, 2007 2:11:00 PM com.jme.scene.Node attachChild
+INFO: Child (TerrainPage2Block4) attached to this node (TerrainPage2)
+Sep 17, 2007 2:11:00 PM com.jme.scene.Node attachChild
+INFO: Child (TerrainPage2) attached to this node (Terrain)
+Sep 17, 2007 2:11:00 PM com.jme.scene.Node <init>
+INFO: Node created.
+Sep 17, 2007 2:11:00 PM com.jme.scene.Node attachChild
+INFO: Child (TerrainPage3Block1) attached to this node (TerrainPage3)
+Sep 17, 2007 2:11:00 PM com.jme.scene.Node attachChild
+INFO: Child (TerrainPage3Block2) attached to this node (TerrainPage3)
+Sep 17, 2007 2:11:00 PM com.jme.scene.Node attachChild
+INFO: Child (TerrainPage3Block3) attached to this node (TerrainPage3)
+Sep 17, 2007 2:11:00 PM com.jme.scene.Node attachChild
+INFO: Child (TerrainPage3Block4) attached to this node (TerrainPage3)
+Sep 17, 2007 2:11:00 PM com.jme.scene.Node attachChild
+INFO: Child (TerrainPage3) attached to this node (Terrain)
+Sep 17, 2007 2:11:00 PM com.jme.scene.Node <init>
+INFO: Node created.
+Sep 17, 2007 2:11:00 PM com.jme.scene.Node attachChild
+INFO: Child (TerrainPage4Block1) attached to this node (TerrainPage4)
+Sep 17, 2007 2:11:00 PM com.jme.scene.Node attachChild
+INFO: Child (TerrainPage4Block2) attached to this node (TerrainPage4)
+Sep 17, 2007 2:11:00 PM com.jme.scene.Node attachChild
+INFO: Child (TerrainPage4Block3) attached to this node (TerrainPage4)
+Sep 17, 2007 2:11:00 PM com.jme.scene.Node attachChild
+INFO: Child (TerrainPage4Block4) attached to this node (TerrainPage4)
+Sep 17, 2007 2:11:00 PM com.jme.scene.Node attachChild
+INFO: Child (TerrainPage4) attached to this node (Terrain)
+Sep 17, 2007 2:11:00 PM com.jme.scene.Node attachChild
+INFO: Child (Terrain) attached to this node (rootNode)
+Sep 17, 2007 2:11:00 PM com.jmex.terrain.util.ProceduralTextureGenerator createTexture
+FINE: Created procedural texture successfully.
+Sep 17, 2007 2:12:40 PM com.ngranek.unsolved.client.KADATHBaseSimpleGame cleanup
+INFO: Cleaning up resources.
+Sep 17, 2007 2:12:40 PM com.jme.app.BaseGame start
+INFO: Application ending.
