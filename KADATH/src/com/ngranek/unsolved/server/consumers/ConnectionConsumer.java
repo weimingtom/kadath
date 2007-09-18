@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.security.MessageDigest;
 
 import com.nextj.util.security.PasswordAuthenticator;
+import com.ngranek.unsolved.client.config.KADATHConfig;
 import com.ngranek.unsolved.server.ClientThread;
 import com.ngranek.unsolved.server.MessagesConsumer;
 import com.ngranek.unsolved.server.Server;
@@ -77,7 +78,8 @@ public class ConnectionConsumer {
 		if (ok) {
 			thread.setSessionId((int) (Math.random()*10000000));
 			thread.setLogin(loginRequest.getLogin());
-			response.setScene("com.ngranek.unsolved.client.scenes.TestScene3");
+			response.setScene(KADATHConfig.getProperty("com.ngranek.unsolved.test.level"));
+			
 		} else {
 			thread.setSessionId(-1);
 		}
