@@ -3,6 +3,7 @@ package com.ngranek.unsolved.client.scenes;
 import javax.swing.ImageIcon;
 
 import com.jme.animation.AnimationController;
+import com.jme.bounding.OrientedBoundingBox;
 import com.jme.image.Texture;
 import com.jme.input.KeyBindingManager;
 import com.jme.input.KeyInput;
@@ -33,6 +34,7 @@ import com.jmex.terrain.util.ProceduralTextureGenerator;
 import com.ngranek.unsolved.client.Main;
 import com.ngranek.unsolved.client.config.KADATHConfig;
 import com.ngranek.unsolved.utils.KADATHModelLoader;
+import com.ngranek.unsolved.utils.KADATHRotatingController;
 
 /**
  * @author Ing. William Anez (cucho)
@@ -53,13 +55,15 @@ public class CuchoScene extends BaseScene {
 	private Timer timer = Main.getInstance().getTimer();
 
 	private AnimationController ac;
-	private Spatial spaceShipModel = null;
 	private WaterRenderPass waterEffectRenderPass;
 	//private ProjectedGrid projectedGrid;
 	private TerrainPage terrain;
 
 	private float farPlane = 500000.0f;
 	private float textureScale = 0.02f;
+	private int throtle = 0;
+	
+	private OrientedBoundingBox ssBounding;
 
 	@Override
 	public void cleanup() {
@@ -90,11 +94,13 @@ public class CuchoScene extends BaseScene {
 		mainNode.attachChild(skybox);
 		rootNode.attachChild(mainNode);
 
-		setupSpaceship(rootNode, spaceShipModel);
+		setupSpaceship(rootNode);
 
 		//buildWaterEffect(mainNode);
 		buildTerrain(mainNode);
 
+		rootNode.updateWorldBound();
+		
 		RenderPass fpsPass = new RenderPass();
 		fpsPass.add(fpsNode);
 		passManager.add(fpsPass);
@@ -115,66 +121,84 @@ public class CuchoScene extends BaseScene {
 			camera.update();
 		}
 
-		if (KeyBindingManager.getKeyBindingManager().isValidCommand("f", false)) {
-			//projectedGrid.switchFreeze();
-			System.out.println("Pressing F");
-		}
+		//		if (KeyBindingManager.getKeyBindingManager().isValidCommand("f", false)) {
+		//			//projectedGrid.switchFreeze();
+		//			System.out.println("Pressing F");
+		//		}
+		//
+		//		if (KeyBindingManager.getKeyBindingManager().isValidCommand("g", false)) {
+		//			waterEffectRenderPass.setUseRefraction(!waterEffectRenderPass.isUseRefraction());
+		//			waterEffectRenderPass.reloadShader();
+		//		}
 
-		if (KeyBindingManager.getKeyBindingManager().isValidCommand("g", false)) {
-			waterEffectRenderPass.setUseRefraction(!waterEffectRenderPass.isUseRefraction());
-			waterEffectRenderPass.reloadShader();
-		}
-		
 		float tpf = Main.getInstance().getTimer().getTimePerFrame();
-		
-		if (KeyBindingManager.getKeyBindingManager().isValidCommand("rotate", false)) {
-			
-			System.out.println("Rotate SpaceShip");
-			
-		}
+		Spatial ss = (Spatial) rootNode.getChild("sf-cucho");
 
-		if (KeyBindingManager.getKeyBindingManager().isValidCommand("lower", true)) {
-			//			waterEffectRenderPass.setWaterHeight(waterEffectRenderPass.getWaterHeight() - tpf * 10.0f);
-			//			projectedGrid.setLocalTranslation(0, -tpf * 10.0f, 0);
-			//			System.out.println("Bajando " + (tpf * 10.0f));
-
-			Spatial s = (Spatial) rootNode.getChild("sf-cucho");
-			if (s != null) {
-				Vector3f cl = s.getLocalTranslation();
-				s.setLocalTranslation(cl.x, cl.y - tpf * 100.0f, cl.z);
+		if (KeyBindingManager.getKeyBindingManager().isValidCommand("up", true)) {
+			if (ss != null) {
+				KADATHRotatingController.rotateXSpatial(ss, tpf);
 			}
-
-		}
-		if (KeyBindingManager.getKeyBindingManager().isValidCommand("higher", true)) {
-
-			//			waterEffectRenderPass.setWaterHeight(waterEffectRenderPass.getWaterHeight() + tpf * 10.0f);
-			//			projectedGrid.setLocalTranslation(0, tpf * 10.0f, 0);
-			//			System.out.println("Subiendo " + (tpf * 10.0f));
-
-			Spatial s = (Spatial) rootNode.getChild("sf-cucho");
-			if (s != null) {
-				Vector3f cl = s.getLocalTranslation();
-				s.setLocalTranslation(cl.x, cl.y + tpf * 100.0f, cl.z);
-			}
-
 		}
 		
+		if (KeyBindingManager.getKeyBindingManager().isValidCommand("down", true)) {
+			if (ss != null) {
+				KADATHRotatingController.rotateXSpatial(ss, -tpf);
+			}
+		}
+		
+		if (KeyBindingManager.getKeyBindingManager().isValidCommand("rleft", true)) {
+			if (ss != null) {
+				KADATHRotatingController.rotateYSpatial(ss, tpf);
+			}
+		}
+		
+		if (KeyBindingManager.getKeyBindingManager().isValidCommand("rright", true)) {
+			if (ss != null) {
+				KADATHRotatingController.rotateYSpatial(ss, -tpf);
+			}
+		}
+		
+		if (KeyBindingManager.getKeyBindingManager().isValidCommand("increaseThrotle", false)) {
+			throtle = 1;
+		}
 
+		if (KeyBindingManager.getKeyBindingManager().isValidCommand("decreaseThrotle", false)) {
+			throtle = 0;
+		}
+
+		if (throtle == 1 && ss != null) {
+			
+			Vector3f center = ssBounding.getCenter();
+			System.out.println("Center: " + center);
+			
+			Vector3f v = new Vector3f();
+			ss.localToWorld(new Vector3f(0, -0.01f, 0), v);
+			ss.setLocalTranslation(v);
+			
+		}
+		
+		rootNode.updateWorldBound();
+		
 	}
 
-	protected void setupSpaceship(Node node, Spatial model) {
+	protected void setupSpaceship(Node node) {
 
 		Vector3f startPoint = new Vector3f(0, 70000, 0);
 
-		model = KADATHModelLoader.loadColladaModel("sf-cucho", KADATHConfig
+		Spatial model = KADATHModelLoader.loadColladaModel("sf-cucho", KADATHConfig
 				.getProperty("com.ngranek.unsolved.models.dir"));
+		ssBounding = new OrientedBoundingBox();
 
 		model.updateGeometricState(0, true);
 		model.setLocalScale(100.0f);
-		model.setLocalTranslation(startPoint);
 		model.setName("sf-cucho");
-
-		node.attachChild(spaceShipModel);
+		model.setModelBound( ssBounding );
+		model.setLocalTranslation(startPoint);
+		model.updateModelBound();
+		
+		
+		
+		node.attachChild(model);
 
 	}
 
@@ -326,13 +350,13 @@ public class CuchoScene extends BaseScene {
 	}
 
 	private void setupKeyBindings() {
-		KeyBindingManager.getKeyBindingManager().set("f", KeyInput.KEY_F);
-		KeyBindingManager.getKeyBindingManager().set("g", KeyInput.KEY_G);
-		
-		KeyBindingManager.getKeyBindingManager().set("rotate", KeyInput.KEY_U);
 
-		KeyBindingManager.getKeyBindingManager().set("lower", KeyInput.KEY_H);
-		KeyBindingManager.getKeyBindingManager().set("higher", KeyInput.KEY_Y);
+		KeyBindingManager.getKeyBindingManager().set("up", KeyInput.KEY_U);
+		KeyBindingManager.getKeyBindingManager().set("down", KeyInput.KEY_J);
+		KeyBindingManager.getKeyBindingManager().set("rleft", KeyInput.KEY_H);
+		KeyBindingManager.getKeyBindingManager().set("rright", KeyInput.KEY_K);
+		KeyBindingManager.getKeyBindingManager().set("increaseThrotle", KeyInput.KEY_1);
+		KeyBindingManager.getKeyBindingManager().set("decreaseThrotle", KeyInput.KEY_0);
 
 		Text t = new Text("Text", "F: switch freeze/unfreeze projected grid");
 		t.setRenderQueueMode(Renderer.QUEUE_ORTHO);
