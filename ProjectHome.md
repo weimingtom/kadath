@@ -1,0 +1,5 @@
+**KADATH** is a multiplayer game engine. The main goal of this project is to develop the **KADATH** engine and a few games based on it. The first game we are developing is **Unsolved**, a 6 degrees of freedom multiplayer FPS.
+
+The first version of the KADATH engine was developed using Java for the server code and [OGRE](http://www.ogre3d.org) for the client, but a few bugs and problems in the OGRE implementation of PagingLandscape have halted the development of that version (we may continue it in the future). The current version is being developed completely under Java, using the excellent [jMonkeyEngine](http://www.jmonkeyengine.com) for the client and the same server implementation (we have discussed using the DarkStar project for the server, but it may come later).
+
+All the code for the development phase will be released under the GPLv2.
